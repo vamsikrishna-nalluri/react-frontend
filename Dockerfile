@@ -1,5 +1,6 @@
 FROM node:alpine as builder
 WORKDIR /app/temp
+# copied only package.json to avoid rebuilding the image because of source change
 COPY ./package.json ./
 RUN npm install
 COPY ./ ./
