@@ -4,4 +4,5 @@ services:
 before_install:
     - docker build -f Dockerfile.dev -t vamckrishna/react-frontend .
 script:
-    - docker run vamckrishna/react-frontend npm test -- --coverage
+    - docker run -e CI=true vamckrishna/react-frontend npm test -- --coverage
+language: generic
