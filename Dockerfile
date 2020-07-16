@@ -1,4 +1,4 @@
-FROM node:alpine as builder
+FROM node:alpine
 WORKDIR /app/temp
 # copied only package.json to avoid rebuilding the image because of source change
 COPY ./package.json ./
@@ -9,5 +9,6 @@ RUN npm run build
 
 # nginx is a production compatible server.
 FROM nginx
+EXPOSE 80
 # use --from to refer to the previous builds
-COPY --from=builder /app/temp/build /usr/share/nginx/html
+COPY --from=0 /app/temp/build /usr/share/nginx/html
